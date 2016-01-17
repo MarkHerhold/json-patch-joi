@@ -71,6 +71,27 @@ describe('JSON Patch Validation', function() {
         expect(res.error).to.equal(null);
     });
 
+    // test for example from article, gist: https://gist.github.com/MarkHerhold/795cc1f73065ca2f3b76
+    it('should fail to replace a nested field', function() {
+        let obj = { nested: { stuff: true } };
+
+        const patch = [{
+            op: 'replace',
+            path: '/nested/stuff',
+            value: 'something else'
+        }];
+
+        const schema = Joi.object().keys({
+            nested: Joi.object().keys({
+                stuff: Joi.any().noChange(obj)
+            })
+        });
+
+        const res = validate(clone(obj), schema, patch);
+        expect(res.value).to.be.an('object');
+        expect(res.error.message).to.equal('child "nested" fails because [child "stuff" fails because ["stuff" is not allowed to be changed]]');
+    });
+
     it('should fail to replace the top-level id field', function() {
         var obj = clone(origObj);
 
