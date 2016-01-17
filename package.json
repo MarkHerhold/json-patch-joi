@@ -1,10 +1,10 @@
 {
   "name": "json-patch-joi",
   "version": "1.0.0",
-  "description": "Validates JSON Patch results using Joi",
+  "description": "Validates JSON Patches using Joi",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/"
+    "test": "eslint . && mocha tests/"
   },
   "engines": {
     "node": ">=4.0.0"
