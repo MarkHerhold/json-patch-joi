@@ -10,9 +10,16 @@ module.exports = function validate(origObj, schema, patches) {
     // * origObj = lodash.cloneDeep(origObj); Link: https://lodash.com/docs#cloneDeep
     // * origObj = Hoek.clone(origObj); Link: https://github.com/hapijs/hoek#cloneobj
 
-    const test = jsonpatch.apply(origObj, patches);
+    // poor man's clone
+    function clone(obj) {
+        return JSON.parse(JSON.stringify(obj));
+    }
 
-    let res = Joi.validate(origObj, schema);
+    let modify = clone(origObj); // make a copy of the original object that jsonpatch will modify
+
+    const test = jsonpatch.apply(modify, patches);
+
+    let res = Joi.validate(modify, schema);
     res.test = test;
 
     // Optionally, we could throw an error if:
