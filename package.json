@@ -1,0 +1,27 @@
+{
+  "name": "json-patch-joi",
+  "version": "1.0.0",
+  "description": "Validates JSON Patch results using Joi",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "keywords": [
+    "json",
+    "REST",
+    "PATCH"
+  ],
+  "author": "Mark Herhold",
+  "license": "MIT",
+  "dependencies": {
+    "fast-json-patch": "0.5.6",
+    "joi": "https://github.com/MarkHerhold/joi#master"
+  },
+  "devDependencies": {
+    "chai": "3.4.1",
+    "mocha": "2.3.4"
+  }
+}
