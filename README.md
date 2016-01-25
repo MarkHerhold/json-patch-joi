@@ -1,6 +1,6 @@
 # JSON Patch Validation with Joi
 
-> Validates JSON Patches ([RFC 6902](https://tools.ietf.org/html/rfc6902)) using Joi. Provides a simple and foolproof way to validate user updates. Please take a look at [https://medium.com/@markherhold/validating-json-patch-requests-44ca5981a7fc#.q3kfy57g5](this article) for rationale and motivations.
+> Validates JSON Patches ([RFC 6902](https://tools.ietf.org/html/rfc6902)) using Joi. Provides a simple and foolproof way to validate user updates. Please take a look at [this article](https://medium.com/@markherhold/validating-json-patch-requests-44ca5981a7fc) for rationale and motivations.
 
 :point_right: This is more of an example repository than a module. I encourage you to implement the ~5 lines of code in [index.js](index.js) in your own project. Be sure to check [package.json](package.json) for the correct Joi dependency, which is currently a fork, [MarkHerhold/joi](https://github.com/MarkHerhold/joi).
 
