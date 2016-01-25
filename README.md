@@ -62,7 +62,3 @@ Returns an object containing the following fields:
 ## Caveats
 
 * :warning: This validation strategy allows patches that modify a value protected by `noChange()` to be "updated" to the exact same value. The update will not be detected by `noChange()`, which means that users will not be informed that they are not allowed to modify the said field. I consider this an acceptable risk.
-
-* :warning: This repository uses [a fork](https://github.com/MarkHerhold/joi) of the Joi library, which adds the [`any.noChange()`](https://github.com/MarkHerhold/joi/blob/master/API.md#anynochangevalue) function, which checks that the validated object matches a provided sister object's value at a given path. This is necessary to inspect the validated object for changes against an unmodified original object.
-
-I will be working on a PR to merge this into Joi.

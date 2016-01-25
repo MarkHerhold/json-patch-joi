@@ -1,7 +1,7 @@
 'use strict';
 
-var Joi = require('joi');
 var jsonpatch = require('fast-json-patch');
+var lodash = require('lodash');
 
 module.exports = function validate(origObj, schema, patches) {
     // You should consider cloning origObj before patching it!
@@ -12,14 +12,14 @@ module.exports = function validate(origObj, schema, patches) {
 
     // poor man's clone
     function clone(obj) {
-        return JSON.parse(JSON.stringify(obj));
+        return lodash.cloneDeep(obj);
     }
 
     let modify = clone(origObj); // make a copy of the original object that jsonpatch will modify
 
     const test = jsonpatch.apply(modify, patches);
 
-    let res = Joi.validate(modify, schema);
+    let res = schema.validate(modify);
     res.test = test;
 
     // Optionally, we could throw an error if:

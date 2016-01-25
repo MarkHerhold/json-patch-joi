@@ -1,8 +1,13 @@
 {
   "name": "json-patch-joi",
+  "private": true,
   "version": "1.0.0",
   "description": "Validates JSON Patches using Joi",
   "main": "index.js",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/MarkHerhold/json-patch-joi"
+  },
   "scripts": {
     "test": "eslint . && mocha tests/"
   },
@@ -18,7 +23,8 @@
   "license": "MIT",
   "dependencies": {
     "fast-json-patch": "0.5.6",
-    "joi": "https://github.com/MarkHerhold/joi#master"
+    "joi": "7.2.2",
+    "joi-nochange": "0.1.0"
   },
   "devDependencies": {
     "chai": "3.4.1",

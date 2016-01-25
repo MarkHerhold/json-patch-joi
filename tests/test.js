@@ -1,8 +1,9 @@
 'use strict';
 
+var Joi = require('joi');
+require('joi-nochange'); // monkey patch in noChange()
 var validate = require('./../index');
 var expect = require('chai').expect;
-var Joi = require('joi');
 
 var origObj = {
     id: 'k1773y',
@@ -79,7 +80,7 @@ describe('JSON Patch Validation', function() {
 
         const res = validate(obj, schema, patch);
         expect(res.value).to.be.an('object');
-        expect(res.error.message).to.equal('child "nested" fails because [child "stuff" fails because ["stuff" is not allowed to be changed]]');
+        expect(res.error.message).to.equal('child "nested" fails because [child "stuff" fails because ["stuff" is not allowed to change]]');
     });
 
     it('should fail to replace the top-level id field', function() {
@@ -91,7 +92,7 @@ describe('JSON Patch Validation', function() {
 
         const res = validate(origObj, schema, patch);
         expect(res.value).to.be.an('object');
-        expect(res.error.message).to.equal('child "cat" fails because ["id" is not allowed to be changed]');
+        expect(res.error.message).to.equal('child "cat" fails because ["id" is not allowed to change]');
     });
 
     it('should fail to remove /meta/created', function() {
@@ -102,7 +103,7 @@ describe('JSON Patch Validation', function() {
 
         const res = validate(origObj, schema, patch);
         expect(res.value).to.be.an('object');
-        expect(res.error.message).to.equal('child "cat" fails because [child "cat" fails because ["born" is required]]');
+        expect(res.error.message).to.equal('child "cat" fails because [child "born" fails because ["born" is required]]');
     });
 
     it('should fail to copy from /favoriteToys/0 to /id', function() {
@@ -114,7 +115,7 @@ describe('JSON Patch Validation', function() {
 
         const res = validate(origObj, schema, patch);
         expect(res.value).to.be.an('object');
-        expect(res.error.message).to.equal('child "cat" fails because ["id" is not allowed to be changed]');
+        expect(res.error.message).to.equal('child "cat" fails because ["id" is not allowed to change]');
     });
 
     it('should fail to move from /favoriteToys/0 to /id', function() {
@@ -126,7 +127,7 @@ describe('JSON Patch Validation', function() {
 
         const res = validate(origObj, schema, patch);
         expect(res.value).to.be.an('object');
-        expect(res.error.message).to.equal('child "cat" fails because ["id" is not allowed to be changed]');
+        expect(res.error.message).to.equal('child "cat" fails because ["id" is not allowed to change]');
     });
 
     it('should fail to patch even when field does not change - set /meta/born to 1452474481612', function() {
